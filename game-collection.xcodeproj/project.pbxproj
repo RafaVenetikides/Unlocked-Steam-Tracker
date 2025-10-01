@@ -14,7 +14,7 @@
 		B12C55702E8C1A640054BD87 /* Exceptions for "game-collection" folder in "game-collection" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Src/Info.plist,
 			);
 			target = B12C555D2E8C1A630054BD87 /* game-collection */;
 		};
@@ -140,6 +140,8 @@
 /* Begin XCBuildConfiguration section */
 		B12C55722E8C1A640054BD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B12C55602E8C1A630054BD87 /* game-collection */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -202,6 +204,8 @@
 		};
 		B12C55742E8C1A640054BD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B12C55602E8C1A630054BD87 /* game-collection */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
