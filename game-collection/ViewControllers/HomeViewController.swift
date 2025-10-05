@@ -33,25 +33,24 @@ class HomeViewController: UIViewController {
     override func loadView() {
         self.view = homeView
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .white
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(sort))
+        
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Your Games"
 
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .white
-
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
-
-        navigationController?.navigationBar.topItem?.rightBarButtonItem =
-            UIBarButtonItem(
-                image: UIImage(systemName: "arrow.up.arrow.down"),
-                style: .plain,
-                target: self,
-                action: #selector(sort)
-            )
 
         loadGames()
     }
@@ -120,6 +119,10 @@ class HomeViewController: UIViewController {
     private func sort() {
         // TODO: - Setup button Action
         auth.setAuthenticated(false, steamId: steamId)
+        
+        if let sceneDelegate = UIApplication.shared.connectedScenes.compactMap({ $0.delegate as? SceneDelegate }).first{
+            sceneDelegate.startAppFlow()
+        }
     }
 }
 

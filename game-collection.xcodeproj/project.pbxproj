@@ -150,6 +150,8 @@
 				DEVELOPMENT_TEAM = 2Q5VC69BFD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "game-collection/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Unlocked;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -183,6 +185,8 @@
 				DEVELOPMENT_TEAM = 2Q5VC69BFD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "game-collection/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Unlocked;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

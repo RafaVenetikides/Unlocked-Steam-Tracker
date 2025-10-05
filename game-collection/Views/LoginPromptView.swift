@@ -11,12 +11,11 @@ class LoginPromptView: UIView {
     
     var loginHandler: (() -> Void)?
     
-    private(set) lazy var logoView: UILabel = {
-        let view = UILabel()
+    private(set) lazy var logoView: UIImageView = {
+        let image = UIImage(named: "logo")
+        let view = UIImageView(image: image)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Logo"
-        view.font = .systemFont(ofSize: 32, weight: .bold)
-        view.textColor =  .white
+        view.contentMode = .scaleAspectFit
         
         return view
     }()
@@ -24,7 +23,7 @@ class LoginPromptView: UIView {
     private(set) lazy var loginDescriptionView: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "App needs you to sign up with Steam."
+        view.text = "Unlocked needs you to sign up with Steam."
         view.font = .systemFont(ofSize: 18, weight: .medium)
         view.textColor =  .white
         
@@ -34,8 +33,7 @@ class LoginPromptView: UIView {
     private(set) lazy var signInButton: UIButton = {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("Login with Steam", for: .normal)
-        view.setTitleColor(.blue, for: .normal)
+        view.setImage(UIImage(named: "steamLogin"), for: .normal)
         view.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
         
         return view
@@ -66,15 +64,24 @@ class LoginPromptView: UIView {
     }
     
     private func setupConstraints() {
+        
+        if let image = signInButton.image(for: .normal) {
+            let ratio = image.size.height/image.size.width
+            signInButton.heightAnchor.constraint(equalTo: signInButton.widthAnchor, multiplier: ratio).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
             logoView.centerXAnchor.constraint(equalTo: centerXAnchor),
             logoView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3),
+            logoView.heightAnchor.constraint(equalTo: logoView.widthAnchor),
             
             loginDescriptionView.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 20),
             loginDescriptionView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             signInButton.topAnchor.constraint(equalTo: loginDescriptionView.bottomAnchor, constant: 20),
             signInButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            signInButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
         ])
     }
     
