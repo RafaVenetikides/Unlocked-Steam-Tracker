@@ -11,20 +11,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B12C55702E8C1A640054BD87 /* Exceptions for "game-collection" folder in "game-collection" target */ = {
+		B1A1EC862E8DD371000F8B50 /* Exceptions for "game-collection" folder in "game-collection" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Src/Info.plist,
+				Info.plist,
 			);
 			target = B12C555D2E8C1A630054BD87 /* game-collection */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B12C55602E8C1A630054BD87 /* game-collection */ = {
+		B1A1EC792E8DD370000F8B50 /* game-collection */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				B12C55702E8C1A640054BD87 /* Exceptions for "game-collection" folder in "game-collection" target */,
+				B1A1EC862E8DD371000F8B50 /* Exceptions for "game-collection" folder in "game-collection" target */,
 			);
 			path = "game-collection";
 			sourceTree = "<group>";
@@ -45,8 +45,8 @@
 		B12C55552E8C1A630054BD87 = {
 			isa = PBXGroup;
 			children = (
-				B12C55602E8C1A630054BD87 /* game-collection */,
 				B12C555F2E8C1A630054BD87 /* Products */,
+				B1A1EC792E8DD370000F8B50 /* game-collection */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,7 +74,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B12C55602E8C1A630054BD87 /* game-collection */,
+				B1A1EC792E8DD370000F8B50 /* game-collection */,
 			);
 			name = "game-collection";
 			packageProductDependencies = (
@@ -140,7 +140,7 @@
 /* Begin XCBuildConfiguration section */
 		B12C55722E8C1A640054BD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = B12C55602E8C1A630054BD87 /* game-collection */;
+			baseConfigurationReferenceAnchor = B1A1EC792E8DD370000F8B50 /* game-collection */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -173,6 +173,8 @@
 		};
 		B12C55732E8C1A640054BD87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B1A1EC792E8DD370000F8B50 /* game-collection */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -204,7 +206,7 @@
 		};
 		B12C55742E8C1A640054BD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = B12C55602E8C1A630054BD87 /* game-collection */;
+			baseConfigurationReferenceAnchor = B1A1EC792E8DD370000F8B50 /* game-collection */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,6 +272,8 @@
 		};
 		B12C55752E8C1A640054BD87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B1A1EC792E8DD370000F8B50 /* game-collection */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

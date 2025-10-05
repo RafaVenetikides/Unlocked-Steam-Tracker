@@ -10,6 +10,10 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private var authManager: AuthManaging = AuthManager(repository: UserDefaultsAuthRepository())
+    private var steamService = SteamService()
+    private var accountCoordinator: AccountCoordinator!
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,11 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        let nav = UINavigationController()
         
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        accountCoordinator = AccountCoordinator(nav: nav, auth: authManager, service: steamService)
         
-        window?.rootViewController = navigationController
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
+        
+        accountCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

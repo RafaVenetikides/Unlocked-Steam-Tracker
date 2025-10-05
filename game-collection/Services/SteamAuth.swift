@@ -33,9 +33,6 @@ class SteamAuth: NSObject {
             defer { self?.session = nil }
 
             if let error = error {
-                print(
-                    "ASWebAuthenticationSession error: \(String(describing: error))"
-                )
                 completion(nil)
                 return
             }
@@ -50,7 +47,6 @@ class SteamAuth: NSObject {
                     $0.name == "steamId"
                 })?.value
             else {
-                print("no steam id found")
                 completion(nil)
                 return
             }
@@ -73,5 +69,4 @@ extension SteamAuth: ASWebAuthenticationPresentationContextProviding {
     {
        return ASPresentationAnchor()
     }
-
 }

@@ -8,6 +8,14 @@
 import UIKit
 
 class UserView: UIView {
+    
+    private(set) lazy var profileImage: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private(set) lazy var labelView: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
