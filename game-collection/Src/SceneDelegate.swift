@@ -10,29 +10,37 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
-    private var authManager: AuthManaging = AuthManager(repository: UserDefaultsAuthRepository())
+
+    private var authManager: AuthManaging = AuthManager(
+        repository: UserDefaultsAuthRepository()
+    )
     private var steamService = SteamService()
     private var accountCoordinator: AccountCoordinator!
 
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().tintColor = .white
         startAppFlow()
     }
-    
+
     func startAppFlow() {
-        let nav = UINavigationController()
-        accountCoordinator = AccountCoordinator(nav: nav, auth: authManager, service: steamService)
-        
-        window?.rootViewController = nav
+        accountCoordinator = AccountCoordinator(
+            auth: authManager,
+            service: steamService
+        )
+
+        window?.rootViewController = accountCoordinator.start()
         window?.makeKeyAndVisible()
-        
-        accountCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -63,6 +71,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
-

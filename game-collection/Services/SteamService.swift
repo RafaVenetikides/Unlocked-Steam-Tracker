@@ -21,7 +21,7 @@ class SteamService {
             return
         }
         
-        let urlString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=\(apiKey)&steamid=\(steamId)&include_appinfo=true"
+        let urlString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=\(apiKey)&steamid=\(steamId)&include_appinfo=true&include_played_free_games=1"
         
         guard let url = URL(string: urlString) else { return }
         

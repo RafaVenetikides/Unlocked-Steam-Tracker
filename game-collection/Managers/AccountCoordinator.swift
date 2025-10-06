@@ -12,32 +12,22 @@ final class AccountCoordinator {
     private let auth: AuthManaging
     private let service: SteamService
     
-    init(nav: UINavigationController, auth: AuthManaging, service: SteamService) {
-        self.nav = nav
+    init(auth: AuthManaging, service: SteamService) {
         self.auth = auth
         self.service = service
     }
     
-    func start() {
+    func start() -> UIViewController {
         if auth.isAuthenticated, let steamId = auth.steamId {
-            showHome(steamId: steamId)
+            return RootTabBarController(auth: auth, steamService: service, steamId: steamId)
         } else {
-            showLogin()
+            let loginVC = LoginPromptViewController(auth: auth)
+            loginVC.onLoginSuccess = { [weak self] steamId in
+                guard let self else { return }
+                self.auth.setAuthenticated(true, steamId: steamId)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.startAppFlow()
+            }
+            return UINavigationController(rootViewController: loginVC)
         }
-    }
-    
-    private func showLogin() {
-        let loginVC = LoginPromptViewController(auth: auth)
-        loginVC.onLoginSuccess = { [weak self] steamId in
-            guard let self else { return }
-            self.auth.setAuthenticated(true, steamId: steamId)
-            self.showHome(steamId: steamId)
-        }
-        nav?.setViewControllers([loginVC], animated: false)
-    }
-    
-    private func showHome(steamId: String) {
-        let homeVC = HomeViewController(auth: auth, steamService: service, steamId: steamId)
-        nav?.setViewControllers([homeVC], animated: true)
     }
 }

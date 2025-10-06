@@ -18,6 +18,9 @@ class HomeViewController: UIViewController {
     private var games: [SteamGameBasic] = []
     private var appDetailsCache: [Int: SteamAppDetails] = [:]
     private var achievementsCache: [Int: (earned: Int, total: Int)] = [:]
+    
+    private var filteredGames: [SteamGameBasic] = []
+    private var searchController = UISearchController(searchResultsController: nil)
 
     init(auth: AuthManaging, steamService: SteamService, steamId: String) {
         self.auth = auth
@@ -48,6 +51,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Your Games"
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Games"
 
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
@@ -61,6 +71,7 @@ class HomeViewController: UIViewController {
 
             DispatchQueue.main.async {
                 self.games = games
+                self.filteredGames = games
                 self.homeView.collectionView.reloadData()
             }
 
@@ -131,9 +142,17 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let game = games[indexPath.item]
+        let game = filteredGames[indexPath.item]
+        
+        let detailVC = GameDetailViewController()
 
-        // TODO: - Setup Navigation for GameDetailView
+        if let details = appDetailsCache[game.appid] {
+            detailVC.setGameData(appId: game.appid, steamId: steamId, name: game.name, imageURL: details.header_image)
+        } else {
+            detailVC.setGameData(appId: game.appid, steamId: steamId, name: game.name, imageURL: "")
+        }
+        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     func collectionView(
@@ -151,7 +170,7 @@ extension HomeViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return games.count
+        return filteredGames.count
     }
 
     func collectionView(
@@ -164,7 +183,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as! GameCell
 
-        let game = games[indexPath.item]
+        let game = filteredGames[indexPath.item]
         let title = game.name
 
         if let details = appDetailsCache[game.appid] {
@@ -192,5 +211,18 @@ extension HomeViewController: UICollectionViewDataSource {
         }
 
         return cell
+    }
+}
+
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text?.lowercased(), !text.isEmpty else {
+            filteredGames = games
+            homeView.collectionView.reloadData()
+            return
+        }
+        
+        filteredGames = games.filter { $0.name.lowercased().contains(text) }
+        homeView.collectionView.reloadData()
     }
 }
