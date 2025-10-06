@@ -63,26 +63,37 @@ class GameDetailViewController: UIViewController {
     }
     
     private func loadAchievements() {
-        steamService.fetchGameSchema(appId: appId) { [weak self] allAchievements in
-            guard let self, let allAchievements else { return }
-            
-            DispatchQueue.main.async {
-                self.achievements = allAchievements
-                self.gameView.achievementsCollection.reloadData()
-            }
-        }
+        var allAchievements: [SteamAchievementSchema] = []
+        var earnedAchievementsNames: Set<String> = []
         
-        steamService.fetchPlayerAchievements(steamId: steamId, appId: appId) { [weak self] stats in
-            guard let self, let stats = stats else { return }
+        steamService.fetchGameSchema(appId: appId) { [weak self] schema in
+            guard let self else { return }
             
-            let earned = stats.achievements?.filter { $0.achieved == 1}.count ?? 0
-            let total = stats.achievements?.count ?? 0
-            let percentage = total > 0 ? Float(earned) / Float(total) : 0
+            if let schema {
+                allAchievements = schema
+            } else {
+                print("No schema found")
+            }
             
-            DispatchQueue.main.async {
-                self.gameView.trophyCount.text = "\(earned)/\(total)"
-                self.gameView.trophyPercentage.text = String(format: "%.0f%%", percentage * 100)
-                self.gameView.trophyProgress.progress = percentage
+            self.steamService.fetchPlayerAchievements(steamId: self.steamId, appId: self.appId) { [weak self] stats in
+                guard let self, let stats = stats else { return }
+                
+                earnedAchievementsNames = Set(
+                    stats.achievements?.filter { $0.achieved == 1}.map { $0.apiname} ?? []
+                )
+                
+                let earnedAchievemets = allAchievements.filter { earnedAchievementsNames.contains($0.name) }
+                
+                let earned = earnedAchievemets.count
+                let total = allAchievements.count
+                let percentage = total > 0 ? Float(earned) / Float(total) : 0
+                
+                DispatchQueue.main.async {
+                    self.achievements = earnedAchievemets
+                    self.gameView.trophyCount.text = "\(earned)/\(total)"
+                    self.gameView.trophyPercentage.text = String(format: "%.0f%%", percentage * 100)
+                    self.gameView.achievementsCollection.reloadData()
+                }
             }
         }
     }
