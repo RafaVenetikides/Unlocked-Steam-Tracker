@@ -92,6 +92,7 @@ class GameDetailViewController: UIViewController {
                     self.achievements = earnedAchievemets
                     self.gameView.trophyCount.text = "\(earned)/\(total)"
                     self.gameView.trophyPercentage.text = String(format: "%.0f%%", percentage * 100)
+                    self.gameView.trophyProgress.progress = percentage
                     self.gameView.achievementsCollection.reloadData()
                 }
             }
