@@ -42,7 +42,7 @@ class RootTabBarController: UITabBarController {
         let searchNav = UINavigationController(rootViewController: searchVC)
         
 
-        let profileVC = ProfileViewController(auth: auth)
+        let profileVC = ProfileViewController(auth: auth, steamService: steamService, steamId: steamId)
         let profileNav = UINavigationController(rootViewController: profileVC)
 
         tabs = [

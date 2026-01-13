@@ -8,7 +8,7 @@
 import Foundation
 
 struct SteamUser: Decodable {
-    let stramid: String
+    let steamid: String
     let personaname: String
     let avatarfull: String
 }

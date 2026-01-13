@@ -138,7 +138,7 @@ class SteamService {
             return
         }
         
-        let urlString = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=\(apiKey)&steamids=\(steamId)"
+        let urlString = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=\(apiKey)&steamids=\(steamId)"
         
         guard let url = URL(string: urlString) else {
             completion(nil)
