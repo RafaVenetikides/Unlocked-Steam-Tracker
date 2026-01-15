@@ -23,10 +23,12 @@ class LoginPromptView: UIView {
     private(set) lazy var loginDescriptionView: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Unlocked needs you to sign up with Steam."
+        view.text = "Connect your Steam account to view your achievements."
         view.font = .systemFont(ofSize: 18, weight: .medium)
-        view.textColor =  .white
-        
+        view.textColor = .white
+        view.numberOfLines = 0
+        view.textAlignment = .center
+
         return view
     }()
     
@@ -38,7 +40,18 @@ class LoginPromptView: UIView {
         
         return view
     }()
-    
+
+    private(set) lazy var disclaimerLabel: UILabel = {
+        let view = UILabel()
+        view.text = "This app is not affiliated with Valve."
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.font = .systemFont(ofSize: 15, weight: .regular)
+        view.textColor =  .white
+        view.textAlignment = .center
+
+        return view
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .darkTeal
@@ -54,7 +67,8 @@ class LoginPromptView: UIView {
         addSubview(logoView)
         addSubview(loginDescriptionView)
         addSubview(signInButton)
-        
+        addSubview(disclaimerLabel)
+
         setupConstraints()
     }
     
@@ -72,16 +86,22 @@ class LoginPromptView: UIView {
         
         NSLayoutConstraint.activate([
             logoView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -60),
             logoView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3),
             logoView.heightAnchor.constraint(equalTo: logoView.widthAnchor),
             
             loginDescriptionView.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 20),
             loginDescriptionView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
+            loginDescriptionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            loginDescriptionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+
             signInButton.topAnchor.constraint(equalTo: loginDescriptionView.bottomAnchor, constant: 20),
             signInButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             signInButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
+
+            disclaimerLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            disclaimerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            disclaimerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
         ])
     }
     
