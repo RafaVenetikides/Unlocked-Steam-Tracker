@@ -12,8 +12,8 @@ struct SteamAPIResult: Decodable {
 }
 
 struct SteamAPIResponse: Decodable {
-    let game_count: Int
-    let games: [SteamGameBasic]
+    let game_count: Int?
+    let games: [SteamGameBasic]?
 }
 
 struct SteamGame {

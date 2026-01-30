@@ -12,11 +12,12 @@ class LoginPromptView: UIView {
     var loginHandler: (() -> Void)?
     
     private(set) lazy var logoView: UIImageView = {
-        let image = UIImage(named: "logo")
+        let image = UIImage(named: "logo")?.withRenderingMode(.alwaysTemplate)
         let view = UIImageView(image: image)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
-        
+        view.tintColor = .systemOrange
+
         return view
     }()
     
@@ -54,8 +55,8 @@ class LoginPromptView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .darkTeal
-        
+        backgroundColor = .black
+
         setupViews()
     }
     

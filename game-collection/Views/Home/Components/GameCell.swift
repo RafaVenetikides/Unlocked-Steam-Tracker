@@ -33,7 +33,6 @@ class GameCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = UIFont.systemFont(ofSize: 10, weight: .regular)
         view.textColor = .systemGray
-        view.text = "AAAAAAAAA"
         
         return view
     }()
@@ -41,7 +40,7 @@ class GameCell: UICollectionViewCell {
     private(set) lazy var cellField: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .cellbackground
+        view.backgroundColor = .cellBackground
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
         
